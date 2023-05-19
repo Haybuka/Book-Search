@@ -4,49 +4,37 @@ import React from "react";
 import styles from "../styles/home.module.css";
 import Image from "next/image";
 import Card from "@/components/card/card";
-import coffeeStore from '../data/coffee-stores.json'
+import coffeeStoreData from "../data/coffee-stores.json";
+import Link from "next/link";
 
 export async function getStaticProps(context) {
   //api request goes here
   //ssg, runs at build time
-  return {
-    props : {
-      coffeeStores : coffeeStore
-    }
-  }
-}
-const Home = ({coffeeStores}) => {
+  const request = await fetch("https://rickandmortyapi.com/api/character");
+  const data = await request.json();
 
+  return {
+    props: {
+      coffeeStores: coffeeStoreData,
+      ricky: data,
+      //passed into component as props
+    },
+  };
+}
+const Home = ({ coffeeStores, ricky }) => {
+  const results = ricky.results;
   const handleOnBannerBtnClick = () => {};
+  // console.log(results)
   // throw Error()
+  // console.log(ricky)
   return (
     <div className={styles.container}>
       <Head>
-        <title>Coffee Connoisseur</title>
+        <title>Home Page</title>
       </Head>
-      <Banner
-        handleOnClick={handleOnBannerBtnClick}
-        buttonText="View stores nearby"
-      />
-      <div className={styles.heroImage}>
-        <Image alt="hero" src="/hero-image.png" width={700} height={400} />
-      </div>
-      <div className={styles.cardLayout}>
-        {
-          coffeeStores.map(store => (
-            <Card
-            name={store.name}
-            imgUrl={store.imgUrl}
-            href={`/coffee-store/${store.id}`}
-            className={styles.card}
-            key={store.id}
-          />
-          ))
-        }
-        
+      <p>WEELLLL!!! , PAGE BLEFT BLANK ON PURPOSE</p>
       
-        
-      </div>
+     
     </div>
   );
 };
