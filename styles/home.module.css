@@ -1,5 +1,9 @@
 /** HOME.MODULE.CSS **/
 
+.bookArticle {
+  @apply col-span-12 md:col-span-6 lg:col-span-4 w-[300px] mx-auto;
+  /* background: #e0e0e0; */
+}
 /** Mobile first development **/
 
 .container {

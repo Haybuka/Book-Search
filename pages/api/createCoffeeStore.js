@@ -1,12 +1,5 @@
-const Airtable = require("airtable");
-Airtable.configure({
-  endpointUrl: "https://api.airtable.com",
-  apiKey: process.env.AIRTABLE_API_KEY,
-});
-const base = Airtable.base(process.env.AIRTABLE_BASE_KEY);
+import { getMinifiedRecords, table } from "@/lib/airtable";
 
-const table = base("coffee store");
-console.log({ table });
 
 // This fixes resolver is not a function
 const createCoffeeStore = async (req, res) => {
@@ -27,14 +20,10 @@ const createCoffeeStore = async (req, res) => {
         if (findCoffeeStoreRecords.length !== 0) {
           // returns an array, hence run a check against the length
 
-          const records = findCoffeeStoreRecords.map((record) => {
-            return {
-              ...record.fields,
-            };
-          });
+          const records = getMinifiedRecords(findCoffeeStoreRecords)
           res.json(records);
         } else {
-          //create a record
+          //create a record if id requested is not available
           if (name) {
             const createRecords = await table.create([
               {
@@ -50,11 +39,7 @@ const createCoffeeStore = async (req, res) => {
             ]);
 
             //created record can be returned and used
-            const records = createRecords.map((record) => {
-              return {
-                ...record.fields,
-              };
-            });
+          const records = getMinifiedRecords(createRecords)
 
             res.json({ message: "create a record", records });
           } else {

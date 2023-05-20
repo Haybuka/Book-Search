@@ -15,12 +15,13 @@
 
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: url('/mesh-gradient.png');
+  /* color: rgb(var(--foreground-rgb));
+  background: url('/mesh-gradient.png'); */
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
   color: #373b64;
+  background-color: rgba(19, 19, 19, 0.848);
   /* background: linear-gradient(
       to bottom,
       transparent,
