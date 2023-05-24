@@ -30,7 +30,7 @@ export const getStaticPaths = async () => {
           },
       }
     );
-
+ 
     const data = await response.json();
     const paths = data.map((post) => {
       return {

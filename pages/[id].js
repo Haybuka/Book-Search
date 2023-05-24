@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 //
@@ -48,14 +49,14 @@ export const getStaticPaths = async () => {
 const BookId = ({ book }) => {
   console.log(book);
   const {
-    title,
-    subtitle,
-    url,
-    authors,
-    description,
-    download,
-    image,
-    publisher,
+    title = "Not Available",
+    subtitle = "Not Available",
+    url = "Not Available",
+    authors = "Not Available",
+    description = "Not Available",
+    download = "Not Available",
+    image = "Not Available",
+    publisher = "Not Available",
   } = book;
 
   const handleDownload = () => {
@@ -73,12 +74,49 @@ const BookId = ({ book }) => {
         />
       </aside>
       <article className="ml-4 w-[700px]">
-        <p className="mb-4 flex justify-end" onClick={handleDownload}>
-          <span className="bg-blue-400 block px-3 py-2 ">Download</span>
+        <p className="mb-4 flex justify-between items-center">
+          <Link href="/" className="bg-red-400 text-white flex px-3 py-2 cursor-pointer">
+        
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 mr-3"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+              />
+            </svg>
+            Back
+          </Link>
+          <span
+            className="bg-blue-400 text-white flex px-3 py-2 cursor-pointer"
+            onClick={handleDownload}
+          >
+            Download
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mx-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+              />
+            </svg>
+          </span>
         </p>
         <section>
           <h3 className="mb-4">
-            <span className="md:text-2xl uppercase block">{title}</span>
+            <span className="md:text-2xl uppercase block">{book.title}</span>
             <span>{subtitle ? subtitle : ""}</span>
           </h3>
           {description && (

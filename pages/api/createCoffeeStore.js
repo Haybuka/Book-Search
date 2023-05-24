@@ -56,6 +56,6 @@ const createCoffeeStore = async (req, res) => {
       res.json({ message: "Error finding or creating store", err });
     }
   }
-};
+}; 
 
 export default createCoffeeStore;
